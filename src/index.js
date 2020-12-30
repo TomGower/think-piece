@@ -4,5 +4,18 @@ import { render } from 'react-dom';
 import './index.scss';
 
 import Application from './components/Application';
+import PostsProvider from './providers/PostsProvider';
+import UserProvider from './providers/UserProvider';
 
-render(<Application />, document.getElementById('root'));
+import { BrowserRouter as Router } from 'react-router-dom';
+
+render(
+  <Router>
+    <PostsProvider>
+      <UserProvider>
+        <Application />
+      </UserProvider>
+    </PostsProvider>
+  </Router>,
+  document.getElementById('root')
+);

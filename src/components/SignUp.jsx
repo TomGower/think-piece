@@ -1,51 +1,61 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { auth, createUserProfileDocument } from '../firebase';
 
-class SignUp extends Component {
-  state = { displayName: '', email: '', password: '' };
+const SignUp = () => {
+  const [inputs, setInputs] = useState({ displayName: '', email: '', password: '' });
 
-  handleChange = event => {
+  const handleChange = event => {
     const { name, value } = event.target;
 
-    this.setState({ [name]: value });
+    setInputs((prevState) => {
+      return ({
+        ...prevState,
+        [name]: value,
+      })
+    })
   };
 
-  handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
-    this.setState({ displayName: '', email: '', password: '' });
+    const { displayName, email, password } = inputs;
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+      createUserProfileDocument(user, { displayName });
+    } catch (error) {
+      console.error(error);
+    }
+
+    setInputs({ displayName: '', email: '', password: '' });
   };
 
-  render() {
-    const { displayName, email, password } = this.state;
-
-    return (
-      <form className="SignUp" onSubmit={this.handleSubmit}>
-        <h2>Sign Up</h2>
-        <input
-          type="text"
-          name="displayName"
-          placeholder="Display Name"
-          value={displayName}
-          onChange={this.handleChange}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={this.handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={password}
-          onChange={this.handleChange}
-        />
-        <input type="submit" value="Sign Up" />
-      </form>
-    );
-  }
+  return (
+    <form className="SignUp" onSubmit={handleSubmit}>
+      <h2>Sign Up</h2>
+      <input
+        type="text"
+        name="displayName"
+        placeholder="Display Name"
+        value={inputs.displayName}
+        onChange={handleChange}
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={inputs.email}
+        onChange={handleChange}
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={inputs.password}
+        onChange={handleChange}
+      />
+      <input type="submit" value="Sign Up" />
+    </form>
+  );
 }
 
 export default SignUp;
