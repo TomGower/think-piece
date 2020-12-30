@@ -1,5 +1,30 @@
 # Firebase && React
 
+## TOM NOTES
+
+This is my adaptation of Steve Kinney's course on Front End Masters
+demonstrating how to use Firebase with a React project. The latest version
+of Steve's course when I went through it was from January 2019 and was done
+using class-based components. Beyond going through the steps in the demo,
+my work included refactoring all of the components to be function components
+and use React Hooks, instead of class-based components using state.
+
+That refactor included a couple interesting challenges. For example, I do not
+recall being exposed to getter and setter functions, and had to figure out how
+to re-write those for a function component. Going through the demo and
+refactor, I had to handle a couple other issues relating to package updating
+and compatability, relating to changes in how Firebase developed. Some of
+these I was able to resolve from other people's issues on Steve's repo, while
+others required more research. Perhaps my trickiest compatability issue came
+with the CurrentUser component, where at different points in the build
+process, I was getting either a JS Date object or a Firebase timestamp. Any
+attempt to treat one as the other either blew up the build or resulted in an
+invalid date.
+
+Overall, this was a fruitful and informative exercise, and I particularly
+enjoyed how Firebase makes authentication easy. If I have a project that
+needs that, I will definitely be considering Firebase.
+
 ## Initial Set Up
 
 - Take a tour of the application.
