@@ -6,15 +6,7 @@ import 'firebase/auth';
 import 'firebase/storage';
 
 // Your web app's Firebase configuration
-const config = {
-  apiKey: "AIzaSyCtruHs_SXUzTiMR9ThqrRUZpH3Tkc7YKM",
-  authDomain: "think-piece-live-2dc20.firebaseapp.com",
-  databaseURL: "https://think-piece-live-2dc20.firebaseio.com",
-  projectId: "think-piece-live-2dc20",
-  storageBucket: "think-piece-live-2dc20.appspot.com",
-  messagingSenderId: "393174501442",
-  appId: "1:393174501442:web:76604478da615840b585db"
-};
+import config from './config.json'
 
 // Initialize Firebase
 firebase.initializeApp(config);
